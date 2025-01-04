@@ -1,0 +1,15 @@
+[
+    {
+        "itemNumber":"AA11",
+        "productName":"Flour",
+        "price_Kg":12.5
+    },{
+        "itemNumber":"BB22",
+        "productName":"Egg",
+        "price_Kg":30.8
+    },{
+        "itemNumber":"CC33",
+        "productName":"Banana",
+        "price_Kg":8.20
+    }
+]
