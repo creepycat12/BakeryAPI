@@ -91,16 +91,16 @@ namespace bakery.api.Controllers
         }
 
 
-        [HttpPost("AddProducts/{id}")]
-        public async Task<ActionResult> AddProduct(int id, ProductsViewModels model)
+        [HttpPost("AddProducts/{SupplierId}")]
+        public async Task<ActionResult> AddProduct(int SupplierId, ProductsViewModels model)
         {
             var supplier = await _context.Suppliers
              .Include(s => s.SupplierProducts)
-             .FirstOrDefaultAsync(s => s.SupplierId == id);
+             .FirstOrDefaultAsync(s => s.SupplierId == SupplierId);
 
-            if (supplier == null)
+            if (supplier == null )
             {
-                return NotFound(new { success = false, StatusCode = 404, message = $"Supplier with ID {id} not found." });
+                return NotFound(new { success = false, StatusCode = 404, message = $"Supplier with ID {SupplierId} not found." });
             }
 
             var product = new Product
@@ -115,7 +115,7 @@ namespace bakery.api.Controllers
 
             var supplierProduct = new SupplierProduct
             {
-                SupplierId = id,
+                SupplierId = SupplierId,
                 ProductId = product.ProductId
             };
 
@@ -123,8 +123,8 @@ namespace bakery.api.Controllers
             await _context.SaveChangesAsync();
 
 
-            return CreatedAtAction(nameof(AddProduct), new {id = product.ProductId});
-    
+            return CreatedAtAction(nameof(AddProduct), new {SupplierId = product.ProductId}, 
+            new{ success = true, Message = $"Product successfully added to Supplier"});
         }
 
         [HttpPatch("{id}")]
