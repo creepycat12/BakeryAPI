@@ -11,5 +11,9 @@ namespace bakery.api.Entities
         public string Name { get; set; }
 
         public IList<SupplierProduct> SupplierProducts { get; set; }
+        public ContactInformation ContactInformation { get; set; }
+        public SupplierAdress SupplierAdress { get; set; }
+        
+        
     }
 }

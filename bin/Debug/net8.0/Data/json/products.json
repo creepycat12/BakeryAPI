@@ -1,15 +1,39 @@
 [
     {
-        "itemNumber":"AA11",
+        "itemNumber":"AAA111",
         "productName":"Flour",
-        "price_Kg":12.5
+        "price_Kg":12.55
     },{
-        "itemNumber":"BB22",
+        "itemNumber":"AAA222",
         "productName":"Egg",
-        "price_Kg":30.8
+        "price_Kg":30.80
     },{
-        "itemNumber":"CC33",
+        "itemNumber":"AAA333",
+        "productName":"Milk 3%",
+        "price_Kg":8.99
+    },{
+        "itemNumber":"BBB111",
         "productName":"Banana",
-        "price_Kg":8.20
+        "price_Kg":18.70
+    },{
+        "itemNumber":"BBB222",
+        "productName":"Peanuts",
+        "price_Kg":50.00
+    },{
+        "itemNumber":"BBB333",
+        "productName":"Strawberry",
+        "price_Kg":69.99
+    },{
+        "itemNumber":"CCC111",
+        "productName":"Milk 1.5%",
+        "price_Kg":6.99
+    },{
+        "itemNumber":"CCC222",
+        "productName":"Yeast",
+        "price_Kg":119.0
+    },{
+        "itemNumber":"CCC333",
+        "productName":"Flour",
+        "price_Kg":13.45
     }
 ]
