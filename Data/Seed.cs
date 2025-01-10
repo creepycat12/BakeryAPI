@@ -56,7 +56,61 @@ namespace bakery.api.Data
             } 
             
         }
+
+        public static async Task LoadAddresses(DataContext context){
+            var options = new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true
+
+            };
+
+            if(context.Addresses.Any()) return;
+
+            var json = File.ReadAllText("Data/json/addresses.json");
+            var addresess = JsonSerializer.Deserialize<List<Address>>(json, options); 
+            
+            if(addresess is not null && addresess.Count>0){
+               await context.Addresses.AddRangeAsync(addresess);
+               await context.SaveChangesAsync();
+            } 
+            
+        }
         
+
+        public static async Task LoadContactInformation(DataContext context){
+            var options = new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true
+
+            };
+
+            if(context.ContactInformations.Any()) return;
+
+            var json = File.ReadAllText("Data/json/contactinformation.json");
+            var contact = JsonSerializer.Deserialize<List<ContactInformation>>(json, options); 
+            
+            if(contact is not null && contact.Count>0){
+               await context.ContactInformations.AddRangeAsync(contact);
+               await context.SaveChangesAsync();
+            } 
+            
+        }
+
+        public static async Task LoadSupplierAddresses(DataContext context){
+            var options = new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true
+
+            };
+
+            if(context.SupplierAdresses.Any()) return;
+
+            var json = File.ReadAllText("Data/json/supplieraddresses.json");
+            var supplieraddress = JsonSerializer.Deserialize<List<SupplierAdress>>(json, options); 
+            
+            if(supplieraddress is not null && supplieraddress.Count>0){
+               await context.SupplierAdresses.AddRangeAsync(supplieraddress);
+               await context.SaveChangesAsync();
+            } 
+            
+        }
         
     }
 

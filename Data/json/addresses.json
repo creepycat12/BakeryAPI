@@ -1,0 +1,23 @@
+[
+    {
+        "addressId": 1,
+        "street": "Countryroad",
+        "streetNr": "6",
+        "postalCode": 38422,
+        "city": "Växjö"
+    },
+    {
+        "addressId": 2,
+        "street": "Field Street",
+        "streetNr": "1",
+        "postalCode": 39239,
+        "city": "Roskilde"
+    },
+    {
+        "addressId": 3,
+        "street": "Victory Avenue",
+        "streetNr": "7",
+        "postalCode": 12987,
+        "city": "Staffanstorp"
+    }
+]

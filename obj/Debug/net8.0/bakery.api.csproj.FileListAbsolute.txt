@@ -154,3 +154,12 @@
 /Users/olgababkina/Advanced/Assignment3/bakery.api/bin/Debug/net8.0/Data/json/products.json
 /Users/olgababkina/Advanced/Assignment3/bakery.api/bin/Debug/net8.0/Data/json/suppliers.json
 /Users/olgababkina/Advanced/Assignment3/bakery.api/bin/Debug/net8.0/Data/json/supplierproducts.json
+/Users/olgababkina/Advanced/Assignment3/bakery.api/obj/Debug/net8.0/bakery.api.sourcelink.json
+/Users/olgababkina/Advanced/Assignment3/bakery.api/bin/Debug/net8.0/Data/json/addresses.json
+/Users/olgababkina/Advanced/Assignment3/bakery.api/bin/Debug/net8.0/Data/json/contactinformation.json
+/Users/olgababkina/Advanced/Assignment3/bakery.api/bin/Debug/net8.0/Data/json/supplieraddresses.json
+/Users/olgababkina/Advanced/Assignment3/bakery.api/bin/Debug/net8.0/Microsoft.OpenApi.dll
+/Users/olgababkina/Advanced/Assignment3/bakery.api/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/olgababkina/Advanced/Assignment3/bakery.api/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/olgababkina/Advanced/Assignment3/bakery.api/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/olgababkina/Advanced/Assignment3/bakery.api/obj/Debug/net8.0/bakery.api.MvcApplicationPartsAssemblyInfo.cs
