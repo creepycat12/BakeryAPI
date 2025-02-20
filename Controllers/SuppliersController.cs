@@ -7,8 +7,8 @@ using bakery.api.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace bakery.api.Controllers
-{
+namespace bakery.api.Controllers;
+
     [ApiController]
     [Route("api/[controller]")]
     public class SuppliersController : ControllerBase
@@ -20,40 +20,43 @@ namespace bakery.api.Controllers
 
         }
 
-        [HttpGet()]
-        public async Task<ActionResult> ListAllSuppliers()
-        {
-            var supplier = await _context.Suppliers
-            .Include(s => s.SupplierProducts)
-            .Select(s => new
-            {
-                Company = s.Name,
-                Adress = new
-                {
-                    Steet = s.SupplierAdress.Address.Street,
-                    SteetNr = s.SupplierAdress.Address.StreetNr,
-                    City = s.SupplierAdress.Address.City,
-                    PostalCode = s.SupplierAdress.Address.PostalCode,
-                    ContactInformation = new
-                    {
-                        Name = s.ContactInformation.ContactPerson,
-                        PhoneNumber = s.ContactInformation.PhoneNumber,
-                        Email = s.ContactInformation.Email
-                    }
-                },
+        // [HttpGet()]
+        // public async Task<ActionResult> ListAllSuppliers()
+        // {
+        //     var supplier = await _context.Suppliers
+        //     .Include(s => s.SupplierIngredients)
+        //     .ThenInclude(s=> s.Supplier.SupplierContact)
+        //     .Include(s => s.SupplierIngredients)
+        //     .ThenInclude(s=> s.Supplier.SupplierAdress)
+        //     .Select(s => new
+        //     {
+        //         Company = s.Name,
+        //         Adress = new
+        //         {
+        //             Steet = s.SupplierAdress.Address.AddressLine,
+        //             City = s.SupplierAdress.Address.PostalAddress.City,
+        //             PostalCode = s.SupplierAdress.Address.PostalAddress.PostalCode,
+        //             ContactInformation = new
+        //             {
+        //                 Name = s.SupplierContact.Contact.Email,
+        //                 //Name = s.SupplierContact.Contact.ContactPerson,
+        //                 PhoneNumber = s.SupplierContact.Contact.PhoneNumber,
+        //                 Email = s.SupplierContact.Contact.Email
+        //             }
+        //         },
 
-                Products = s.SupplierProducts
-                    .Select(sp => new
-                    {
-                        sp.Product.ItemNumber,
-                        sp.Product.ProductName,
-                        price = sp.Product.Price_Kg
-                    })
-            })
-            .ToListAsync();
+        //         Products = s.SupplierIngredients
+        //             .Select(sp => new
+        //             {
+        //                 sp.ingredient.ItemNumber,
+        //                 sp.ingredient.IngredientName,
+        //                 price = sp.ingredient.Price_Kg
+        //             })
+        //     })
+        //     .ToListAsync();
 
-            return Ok(new { success = true, StatusCode = 200, data = supplier });
-        }
+        //     return Ok(new { success = true, StatusCode = 200, data = supplier });
+        // }
 
         [HttpGet("{name}")]
         public async Task<ActionResult> FindSupplier(string name)
@@ -61,16 +64,16 @@ namespace bakery.api.Controllers
 
             var supplier = await _context.Suppliers
             .Where(s => s.Name.ToLower() == name.ToLower())
-            .Include(p => p.SupplierProducts)
+            .Include(p => p.SupplierIngredients)
             .Select(supplier => new
             {
                 supplier.Name,
-                products = supplier.SupplierProducts
+                products = supplier.SupplierIngredients
                 .Select(prod => new
                 {
-                    prod.Product.ProductName,
-                    prod.Product.Price_Kg,
-                    prod.Product.ItemNumber
+                    prod.ingredient.IngredientName,
+                    prod.ingredient.Price_Kg,
+                    prod.ingredient.ItemNumber
                 })
             })
             .FirstOrDefaultAsync();
@@ -84,4 +87,3 @@ namespace bakery.api.Controllers
 
         }
     }
-}

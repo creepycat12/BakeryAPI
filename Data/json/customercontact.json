@@ -1,0 +1,15 @@
+[
+    {
+        "contactId":4,
+        "customerId":1
+    },
+    {
+        "contactId":5,
+        "customerId":2
+    },
+    {
+        "contactId":6,
+        "customerId":3
+    }
+
+]

@@ -1,6 +1,6 @@
 namespace bakery.api.Entities
 {
-    public class SupplierAdress
+    public class SupplierAddress
     {
         public int SupplierId { get; set; }
         public int AddressId { get; set; }

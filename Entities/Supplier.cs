@@ -10,9 +10,9 @@ namespace bakery.api.Entities
         public int SupplierId { get; set; }
         public string Name { get; set; }
 
-        public IList<SupplierProduct> SupplierProducts { get; set; }
-        public ContactInformation ContactInformation { get; set; }
-        public SupplierAdress SupplierAdress { get; set; }
+        public IList<SupplierIngredient> SupplierIngredients { get; set; }
+        public SupplierContact SupplierContact { get; set; }
+        public IList<SupplierAddress> Addresses { get; set; }
         
         
     }

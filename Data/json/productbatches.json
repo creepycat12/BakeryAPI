@@ -1,0 +1,25 @@
+[
+    {
+        "productId": 1,
+        "preperationDate": "2025-02-05",
+        "expiryDate": "2025-03-05"
+    },
+    {
+        "productId": 2,
+        "preperationDate": "2025-02-10",
+        "expiryDate": "2025-03-17"
+    },
+    {
+        "productId": 3,
+        "preperationDate": "2025-02-01",
+        "expiryDate": "2025-07-01"
+    },{
+        "productId": 4,
+        "preperationDate": "2025-02-01",
+        "expiryDate": "2025-07-01"
+    },{
+        "productId": 5,
+        "preperationDate": "2025-02-11",
+        "expiryDate": "2025-03-18"
+    }
+]

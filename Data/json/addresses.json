@@ -1,23 +1,50 @@
 [
+    
     {
-        "addressId": 1,
-        "street": "Countryroad",
-        "streetNr": "6",
-        "postalCode": 38422,
-        "city": "Växjö"
+        "addressLine": "Countryroad 1",
+        "addressTypeId": 2,
+        "postalAddressId": 1
     },
     {
-        "addressId": 2,
-        "street": "Field Street",
-        "streetNr": "1",
-        "postalCode": 39239,
-        "city": "Roskilde"
+        "addressLine": "Field Street 12",
+        "addressTypeId": 2,
+        "postalAddressId": 2
     },
     {
-        "addressId": 3,
-        "street": "Victory Avenue",
-        "streetNr": "7",
-        "postalCode": 12987,
-        "city": "Staffanstorp"
+        "addressLine": "Victory Avenue 22",
+        "addressTypeId": 2,
+        "postalAddressId": 3
+    },
+    {
+        "addressLine": "Halsey 16",
+        "addressTypeId":1,
+        "postalAddressId": 2
+    },
+    {
+        "addressLine": "Karl Marxs st 1",
+        "addressTypeId": 3,
+        "postalAddressId": 3
+    },
+    {
+        "addressLine": "Drottninggatan 27",
+        "addressTypeId": 1,
+        "postalAddressId": 1
+    }
+    ,
+    {
+        "addressLine": "NewRoad 18",
+        "addressTypeId": 3,
+        "postalAddressId": 1
+    },
+    {
+        "addressLine": "Drottninggatan 27",
+        "addressTypeId": 1,
+        "postalAddressId": 1
+    }
+    ,
+    {
+        "addressLine": "NewRoad 18",
+        "addressTypeId": 3,
+        "postalAddressId": 1
     }
 ]

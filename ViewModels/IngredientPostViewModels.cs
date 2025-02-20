@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace bakery.api.ViewModels
 {
-    public class ProductsViewModels
+    public class IngredientPostViewModel
     {
         public string ItemNumber { get; set; }
-        public string ProductName { get; set; }
+        public string IngredientName { get; set; }
         public decimal Price_Kg { get; set; }
         
     }
