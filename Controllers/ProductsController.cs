@@ -27,8 +27,14 @@ public class ProductsController : ControllerBase
     [HttpGet()]
     public async Task<IActionResult> ListProducts()
     {
-        return Ok(new { success = true, data = await _unitOfWork.ProductRepository.ListAllProducts() });
-
+        try{
+            return Ok(new { success = true, data = await _unitOfWork.ProductRepository.ListAllProducts() });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { success = false, message = ex.Message });
+        }
+       
     }
 
     [HttpGet("{id}")]
@@ -45,7 +51,7 @@ public class ProductsController : ControllerBase
         }
     }
 
-    [HttpPost("/api/Products/Add")]
+    [HttpPost("Add")]
     public async Task<ActionResult> AddProduct(ProductPostViewModel model)
     {
         if(await _unitOfWork.ProductRepository.AddProduct(model))
@@ -62,10 +68,12 @@ public class ProductsController : ControllerBase
         }
     }
 
-   [HttpPatch("/products/{id}/price/{price}")]
+   [HttpPatch("{id}/price/{price}")]
     public async Task<ActionResult> UpdatePrice(int id, decimal price)
     {
-        if( await _unitOfWork.ProductRepository.Update(id, price))
+        try
+        {
+            if( await _unitOfWork.ProductRepository.Update(id, price))
         {
             if(_unitOfWork.HasChanges())
             {
@@ -76,8 +84,15 @@ public class ProductsController : ControllerBase
         }
         else
         {
-            return BadRequest();
+            return BadRequest(new { success = false, message = $"Product with ID {id} not found" });
         }
+
+        }
+        catch(Exception ex)
+        {
+            return StatusCode(500, new { success = false, message = ex.Message });
+        }
+       
     }
 }
 

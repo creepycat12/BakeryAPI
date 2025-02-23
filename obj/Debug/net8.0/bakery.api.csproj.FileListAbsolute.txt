@@ -339,3 +339,5 @@
 /Users/olgababkina/Advanced/Assignment4/bakery.api/bin/Debug/net8.0/Data/json/orderproducts.json
 /Users/olgababkina/Advanced/Assignment4/bakery.api/bin/Debug/net8.0/Data/json/products.json
 /Users/olgababkina/Advanced/Assignment4/bakery.api/bin/Debug/net8.0/Data/json/productbatches.json
+/Users/olgababkina/Advanced/Assignment4/bakery.api/bin/Debug/net8.0/MySqlConnector.dll
+/Users/olgababkina/Advanced/Assignment4/bakery.api/bin/Debug/net8.0/Pomelo.EntityFrameworkCore.MySql.dll

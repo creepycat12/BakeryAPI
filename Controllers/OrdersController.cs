@@ -37,7 +37,7 @@ public class OrdersController : ControllerBase
         }
         catch (Exception ex)
         {
-            throw new Exception(ex.Message);
+            return StatusCode(500, new { success = false, message = $"An error occurred: {ex.Message}" });
 
         }
 
@@ -54,7 +54,7 @@ public class OrdersController : ControllerBase
         }
         catch (Exception ex)
         {
-            throw new Exception(ex.Message);
+            return StatusCode(500, new { success = false, message = $"An error occurred: {ex.Message}" });
         }
 
     }
@@ -70,26 +70,32 @@ public class OrdersController : ControllerBase
         }
         catch (Exception ex)
         {
-            throw new Exception(ex.Message);
+            return StatusCode(500, new { success = false, message = $"An error occurred: {ex.Message}" });
         }
     }
 
     [HttpPost()]
     public async Task<ActionResult> AddOrder(OrdersPostViewModel model)
     {
-        if (await _unitOfWork.OrderRepository.Add(model))
+        try
         {
-            if (_unitOfWork.HasChanges())
+            if (await _unitOfWork.OrderRepository.Add(model))
             {
-                await _unitOfWork.Complete();
+                if (_unitOfWork.HasChanges())
+                {
+                    await _unitOfWork.Complete();
+                }
+                return StatusCode(201);
             }
-            return StatusCode(201);
+            else
+            {
+                return BadRequest();
+            }
         }
-        else
+        catch (Exception ex)
         {
-            return BadRequest();
+            return StatusCode(500, new { success = false, message = $"An error occurred: {ex.Message}" });
         }
-
     }
 
 }

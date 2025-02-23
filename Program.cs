@@ -6,18 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 32));
+
 //Knytta sammen app med DB
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseSqlite(builder.Configuration.GetConnectionString("DevConnection"));
+    options.UseMySql(builder.Configuration.GetConnectionString("MySQL"), serverVersion);
+    //options.UseSqlite(builder.Configuration.GetConnectionString("DevConnection"));
 });
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-//builder.Services.AddScoped<IProductRepository, ProductRepository>();
-//builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
-//builder.Services.AddScoped<IBatchRepository, BatchRepository>();
-//builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
 
 builder.Services.AddControllers();
 

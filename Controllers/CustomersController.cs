@@ -30,8 +30,20 @@ public class CustomersController : ControllerBase
     [HttpGet]
     public async Task<ActionResult> ListAllCustomers()
     {
-        var customers = await _unitOfWork.CustomerRepository.List();
-        return Ok(new { success = true, data = customers });
+        try
+        {
+            var customers = await _unitOfWork.CustomerRepository.List();
+
+            if (customers is null)
+                return NotFound(new { success = false, message = "No customers found." });
+
+            return Ok(new { success = true, data = customers });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return StatusCode(500, new { success = false, message = "An error occured while getting customers" });
+        }
     }
 
     [HttpGet("{id}")]
@@ -51,30 +63,30 @@ public class CustomersController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> AddCustomer(AddCustomerForRepViewModel model)
     {
-    
-            if(await _unitOfWork.CustomerRepository.Add(model))
+
+        if (await _unitOfWork.CustomerRepository.Add(model))
+        {
+
+            if (_unitOfWork.HasChanges())
             {
-
-                if (_unitOfWork.HasChanges())
-                {
-                    await _unitOfWork.Complete();
-                }
-
-                 return StatusCode(201);
+                await _unitOfWork.Complete();
             }
-            else
-            {
-                return BadRequest();
-            }   
+
+            return StatusCode(201);
+        }
+        else
+        {
+            return BadRequest();
+        }
 
     }
-    
+
     [HttpPut("/updateContact/{id}")]
     public async Task<ActionResult> UpdateContactPerson(int id, ContactBaseViewModel model)
     {
-        if(await _unitOfWork.CustomerRepository.Update(id, model))
+        if (await _unitOfWork.CustomerRepository.Update(id, model))
         {
-            if(_unitOfWork.HasChanges())
+            if (_unitOfWork.HasChanges())
             {
                 await _unitOfWork.Complete();
             }
@@ -87,7 +99,7 @@ public class CustomersController : ControllerBase
         }
     }
 
-    }
+}
 
 
 

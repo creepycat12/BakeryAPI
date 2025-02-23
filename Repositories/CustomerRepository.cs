@@ -31,66 +31,54 @@ public class CustomerRepository : ICustomerRepository
     {
         try
         {
-            if (await _context.Customers.FirstOrDefaultAsync(c => c.Name.ToLower() == model.Name.ToLower()) is not null)
+            if (await _context.Customers.AnyAsync(c => c.Name.ToLower() == model.Name.ToLower()))
             {
-                throw new Exception($"The customer already exists");
+                throw new Exception($"The customer {model.Name} already exists.");
             }
 
-            var customer = new Customer
-            {
-                Name = model.Name
-            };
-
+            var customer = new Customer { Name = model.Name };
             await _context.AddAsync(customer);
             await _context.SaveChangesAsync();
 
             var contact = await _context.Contact.FirstOrDefaultAsync(c => c.Email == model.Contacts.Email);
             if (contact is not null)
             {
-                throw new Exception("Contact already exists");
+                throw new Exception($"A customer with email {model.Contacts.Email} already exists.");
             }
-            else
-            {
-                contact = new Contact
-                {
-                    ContactPerson = model.Contacts.ContactPerson,
-                    Email = model.Contacts.Email,
-                    PhoneNumber = model.Contacts.PhoneNumber
-                };
-                await _context.Contact.AddAsync(contact);
-                await _context.SaveChangesAsync();
 
-            }
+            contact = new Contact
+            {
+                ContactPerson = model.Contacts.ContactPerson,
+                Email = model.Contacts.Email,
+                PhoneNumber = model.Contacts.PhoneNumber
+            };
+            await _context.Contact.AddAsync(contact);
+            await _context.SaveChangesAsync();
 
             var customerContact = new CustomerContact
             {
                 CustomerId = customer.Id,
                 ContactId = contact.ContactId
             };
-
             await _context.CustomerContacts.AddAsync(customerContact);
-
 
             foreach (var a in model.Addresses)
             {
                 var address = await _repo.Add(a);
-
                 await _context.CustomerAddresses.AddAsync(new CustomerAddress
                 {
                     Address = address,
                     Customer = customer
-
                 });
             }
+
             await _context.SaveChangesAsync();
             return true;
-
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error adding customer: {ex.Message}");
+            Console.WriteLine(ex.Message);
             return false;
-
         }
     }
 
@@ -165,61 +153,70 @@ public class CustomerRepository : ICustomerRepository
         }
         catch (Exception ex)
         {
-            throw new Exception($"Error fetching customer: {ex.Message}");
+            throw new Exception(ex.Message);
 
         }
     }
 
-
     public async Task<IList<CustomersViewModel>> List()
     {
-        var response = await _context.Customers
-        .Include(c => c.CustomerContact)
-        .ThenInclude(c => c.Contact)
-        .ToListAsync();
-
-        var customers = response.Select(c => new CustomersViewModel
+        try
         {
-            Id = c.Id,
-            Name = c.Name,
-            ContactPerson = c.CustomerContact.Contact.ContactPerson,
-            Email = c.CustomerContact.Contact.Email,
-            PhoneNumber = c.CustomerContact.Contact.PhoneNumber
-        });
+            var response = await _context.Customers
+                .Include(c => c.CustomerContact)
+                .ThenInclude(c => c.Contact)
+                .ToListAsync();
 
-        return customers.ToList();
+            if (!response.Any())
+            {
+                throw new Exception("No customers found.");
+            }
+
+            return response.Select(c => new CustomersViewModel
+            {
+                Id = c.Id,
+                Name = c.Name,
+                ContactPerson = c.CustomerContact.Contact.ContactPerson,
+                Email = c.CustomerContact.Contact.Email,
+                PhoneNumber = c.CustomerContact.Contact.PhoneNumber
+            }).ToList();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 
     public async Task<bool> Update(int id, ContactBaseViewModel model)
     {
         try
         {
-        var customer = await _context.Customers
-        .Include (c => c.CustomerContact)
-        .SingleOrDefaultAsync(c => c.Id == id);
+            var customer = await _context.Customers
+            .Include(c => c.CustomerContact)
+            .SingleOrDefaultAsync(c => c.Id == id);
 
-        if(customer is null)
-        {
-            throw new Exception($"We dont have a client with ID {id}");
+            if (customer is null)
+            {
+                throw new Exception($"We dont have a client with ID {id}");
+            }
+
+            var contact = new Contact
+            {
+                ContactId = customer.CustomerContact.ContactId,
+                ContactPerson = model.ContactPerson,
+                PhoneNumber = model.PhoneNumber,
+                Email = model.Email
+            };
+
+            _context.Contact.Update(contact);
+            await _context.SaveChangesAsync();
+            return true;
+
         }
-
-        var contact = new Contact
-        {
-            ContactId = customer.CustomerContact.ContactId,
-            ContactPerson = model.ContactPerson,
-            PhoneNumber = model.PhoneNumber,
-            Email = model.Email
-        };
-
-        _context.Contact.Update(contact);
-        await _context.SaveChangesAsync();
-        return true;
-
-        }
-        catch(Exception)
+        catch (Exception)
         {
             throw;
         }
-    
+
     }
 }

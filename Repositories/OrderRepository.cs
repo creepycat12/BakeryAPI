@@ -27,7 +27,9 @@ public class OrderRepository : IOrderRepository
 
     public async Task<bool> Add(OrdersPostViewModel model)
     {
-        var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Name.Replace(" ", "").ToLower().Trim() == model.Name.Replace(" ", "").ToLower().Trim());
+        try
+        {
+            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Name.Replace(" ", "").ToLower().Trim() == model.Name.Replace(" ", "").ToLower().Trim());
         if (customer is null)
         {
             var deliveryAddress = await _addressrepo.Add(new AddressPostViewModel
@@ -38,7 +40,6 @@ public class OrderRepository : IOrderRepository
                 AddressType = AddressTypeEnum.Delivery
             });
 
-            // Use the Address Repository to check and add Invoice Address
             var invoiceAddress = await _addressrepo.Add(new AddressPostViewModel
             {
                 AddressLine = model.InvoiceAddress,
@@ -112,17 +113,19 @@ public class OrderRepository : IOrderRepository
                 ProductId = product.ProductId
             });
         }
-        try
-        {
+    
+
             await _context.Orders.AddAsync(newOrder);
             await _context.SaveChangesAsync();
             return true;
+
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
+            throw new Exception($"Error while adding order  {ex.Message}");
         }
-        return false;
+        
+    
     }
 
 
@@ -155,7 +158,7 @@ public class OrderRepository : IOrderRepository
         }
         catch (Exception ex)
         {
-            throw new Exception(ex.Message);
+             throw new Exception($"Error while finding order  {ex.Message}");
         }
     }
 
@@ -163,6 +166,13 @@ public class OrderRepository : IOrderRepository
     {
         try
         {
+            var orderdate = await _context.Orders.FirstOrDefaultAsync(c => c.OrderDate == orderDate);
+            if (orderdate is null){
+                return null; 
+                throw new Exception($"No orders found with Order Date {orderDate}");
+                
+            }
+
             var orders = await _context.Orders
             .Where(c => c.OrderDate == orderDate)
             .Include(c => c.OrderProducts)
@@ -186,9 +196,9 @@ public class OrderRepository : IOrderRepository
 
             return orders;
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            throw;
+             throw new Exception($"Error while finding order {ex.Message}");
         }
     }
 

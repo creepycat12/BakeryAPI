@@ -12,7 +12,7 @@ namespace bakery.api.Entities
 
         public IList<SupplierIngredient> SupplierIngredients { get; set; }
         public SupplierContact SupplierContact { get; set; }
-        public IList<SupplierAddress> Addresses { get; set; }
+        public IList<SupplierAddress> SupplierAddresses { get; set; }
         
         
     }

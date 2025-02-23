@@ -47,6 +47,11 @@ public class ProductRepository : IProductRepository
                  .Include(c => c.ProductBatches)
                  .SingleOrDefaultAsync();
 
+             if (product == null)
+            {
+                throw new Exception($"Product with ID {id} not found.");
+            }
+
             var view = new GetProductViewModel
             {
                 Id = product.Id,
@@ -108,10 +113,11 @@ public class ProductRepository : IProductRepository
 
             if (product is null)
             {
-                throw new Exception($"Product with Id {id} does not exist");
-
+                return false;
+               
             }
             product.PackPrice = price;
+              _context.Products.Update(product);
 
             await _context.SaveChangesAsync();
             return true;
