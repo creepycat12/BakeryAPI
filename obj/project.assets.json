@@ -3661,11 +3661,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/olgababkina/Advanced/Assignment3/bakery.api/bakery.api.csproj",
+      "projectUniqueName": "/Users/olgababkina/Web/Assignment/bakery.api/bakery.api.csproj",
       "projectName": "bakery.api",
-      "projectPath": "/Users/olgababkina/Advanced/Assignment3/bakery.api/bakery.api.csproj",
+      "projectPath": "/Users/olgababkina/Web/Assignment/bakery.api/bakery.api.csproj",
       "packagesPath": "/Users/olgababkina/.nuget/packages/",
-      "outputPath": "/Users/olgababkina/Advanced/Assignment3/bakery.api/obj/",
+      "outputPath": "/Users/olgababkina/Web/Assignment/bakery.api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/olgababkina/.nuget/NuGet/NuGet.Config"

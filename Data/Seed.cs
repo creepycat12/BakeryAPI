@@ -4,19 +4,19 @@ namespace bakery.api.Data
 {
     public static class Seed
     {
-        public static async Task LoadProducts(DataContext context){
+        public static async Task LoadIngredients(DataContext context){
             var options = new JsonSerializerOptions{
                 PropertyNameCaseInsensitive=true
 
             };
 
-            if(context.Products.Any()) return;
+            if(context.Ingredients.Any()) return;
 
-            var json = File.ReadAllText("Data/json/products.json");
-            var products = JsonSerializer.Deserialize<List<Product>>(json, options); 
+            var json = File.ReadAllText("Data/json/ingredients.json");
+            var ingredients = JsonSerializer.Deserialize<List<Ingredient>>(json, options); 
             
-            if(products is not null && products.Count>0){
-               await context.Products.AddRangeAsync(products);
+            if(ingredients is not null && ingredients.Count>0){
+               await context.Ingredients.AddRangeAsync(ingredients);
                await context.SaveChangesAsync();
             } 
             
@@ -39,19 +39,36 @@ namespace bakery.api.Data
             } 
             
         }
-        public static async Task LoadSupplierProducts(DataContext context){
+         public static async Task LoadCustomers(DataContext context){
             var options = new JsonSerializerOptions{
                 PropertyNameCaseInsensitive=true
 
             };
 
-            if(context.SupplierProducts.Any()) return;
+            if(context.Customers.Any()) return;
 
-            var json = File.ReadAllText("Data/json/supplierproducts.json");
-            var suppliersproducts = JsonSerializer.Deserialize<List<SupplierProduct>>(json, options); 
+            var json = File.ReadAllText("Data/json/customer.json");
+            var customers = JsonSerializer.Deserialize<List<Customer>>(json, options); 
             
-            if(suppliersproducts is not null && suppliersproducts.Count>0){
-               await context.SupplierProducts.AddRangeAsync(suppliersproducts);
+            if(customers is not null && customers.Count>0){
+               await context.Customers.AddRangeAsync(customers);
+               await context.SaveChangesAsync();
+            } 
+            
+        }
+        public static async Task LoadSupplierIngredients(DataContext context){
+            var options = new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true
+
+            };
+
+            if(context.SupplierIngredients.Any()) return;
+
+            var json = File.ReadAllText("Data/json/supplieringredients.json");
+            var suppliersingredients = JsonSerializer.Deserialize<List<SupplierIngredient>>(json, options); 
+            
+            if(suppliersingredients is not null && suppliersingredients.Count>0){
+               await context.SupplierIngredients.AddRangeAsync(suppliersingredients);
                await context.SaveChangesAsync();
             } 
             
@@ -74,6 +91,43 @@ namespace bakery.api.Data
             } 
             
         }
+
+         public static async Task LoadAddressTypes(DataContext context){
+            var options = new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true
+
+            };
+
+            if(context.AddressTypes.Any()) return;
+
+            var json = File.ReadAllText("Data/json/addresstypes.json");
+            var addresstypes = JsonSerializer.Deserialize<List<AddressType>>(json, options); 
+            
+            if(addresstypes is not null && addresstypes.Count>0){
+               await context.AddressTypes.AddRangeAsync(addresstypes);
+               await context.SaveChangesAsync();
+            } 
+            
+        }
+
+
+         public static async Task LoadPostalAddresses(DataContext context){
+            var options = new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true
+
+            };
+
+            if(context.PostalAddresses.Any()) return;
+
+            var json = File.ReadAllText("Data/json/postaladdress.json");
+            var postaladdress = JsonSerializer.Deserialize<List<PostalAddress>>(json, options); 
+            
+            if(postaladdress is not null && postaladdress.Count>0){
+               await context.PostalAddresses.AddRangeAsync(postaladdress);
+               await context.SaveChangesAsync();
+            } 
+            
+        }
         
 
         public static async Task LoadContactInformation(DataContext context){
@@ -82,13 +136,50 @@ namespace bakery.api.Data
 
             };
 
-            if(context.ContactInformations.Any()) return;
+            if(context.Contact.Any()) return;
 
             var json = File.ReadAllText("Data/json/contactinformation.json");
-            var contact = JsonSerializer.Deserialize<List<ContactInformation>>(json, options); 
+            var contact = JsonSerializer.Deserialize<List<Contact>>(json, options); 
             
             if(contact is not null && contact.Count>0){
-               await context.ContactInformations.AddRangeAsync(contact);
+               await context.Contact.AddRangeAsync(contact);
+               await context.SaveChangesAsync();
+            } 
+            
+        }
+
+
+        public static async Task LoadSupplierContactInformation(DataContext context){
+            var options = new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true
+
+            };
+
+            if(context.SupplierContact.Any()) return;
+
+            var json = File.ReadAllText("Data/json/suppliercontact.json");
+            var contact = JsonSerializer.Deserialize<List<SupplierContact>>(json, options); 
+            
+            if(contact is not null && contact.Count>0){
+               await context.SupplierContact.AddRangeAsync(contact);
+               await context.SaveChangesAsync();
+            } 
+            
+        }
+
+         public static async Task LoadCustomerContactInformation(DataContext context){
+            var options = new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true
+
+            };
+
+            if(context.CustomerContacts.Any()) return;
+
+            var json = File.ReadAllText("Data/json/customercontact.json");
+            var contact = JsonSerializer.Deserialize<List<CustomerContact>>(json, options); 
+            
+            if(contact is not null && contact.Count>0){
+               await context.CustomerContacts.AddRangeAsync(contact);
                await context.SaveChangesAsync();
             } 
             
@@ -100,17 +191,128 @@ namespace bakery.api.Data
 
             };
 
-            if(context.SupplierAdresses.Any()) return;
+            if(context.SupplierAddresses.Any()) return;
 
             var json = File.ReadAllText("Data/json/supplieraddresses.json");
-            var supplieraddress = JsonSerializer.Deserialize<List<SupplierAdress>>(json, options); 
+            var supplieraddress = JsonSerializer.Deserialize<List<SupplierAddress>>(json, options); 
             
             if(supplieraddress is not null && supplieraddress.Count>0){
-               await context.SupplierAdresses.AddRangeAsync(supplieraddress);
+               await context.SupplierAddresses.AddRangeAsync(supplieraddress);
                await context.SaveChangesAsync();
             } 
             
         }
+
+        public static async Task LoadCustomerAddresses(DataContext context){
+            var options = new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true
+
+            };
+
+            if(context.CustomerAddresses.Any()) return;
+
+            var json = File.ReadAllText("Data/json/customeraddresses.json");
+            var customeraddress = JsonSerializer.Deserialize<List<CustomerAddress>>(json, options); 
+            
+            if(customeraddress is not null && customeraddress.Count>0){
+               await context.CustomerAddresses.AddRangeAsync(customeraddress);
+               await context.SaveChangesAsync();
+            } 
+            
+        }
+
+
+        public static async Task LoadOrders(DataContext context){
+            var options = new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true
+
+            };
+
+            if(context.Orders.Any()) return;
+
+            var json = File.ReadAllText("Data/json/orders.json");
+            var orders = JsonSerializer.Deserialize<List<Order>>(json, options); 
+            
+            if(orders is not null && orders.Count>0){
+               await context.Orders.AddRangeAsync(orders);
+               await context.SaveChangesAsync();
+            } 
+            
+        }
+
+         public static async Task LoadCustomerOrders(DataContext context){
+            var options = new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true
+
+            };
+
+            if(context.CustomerOrders.Any()) return;
+
+            var json = File.ReadAllText("Data/json/customerorders.json");
+            var orders = JsonSerializer.Deserialize<List<CustomerOrder>>(json, options); 
+            
+            if(orders is not null && orders.Count>0){
+               await context.CustomerOrders.AddRangeAsync(orders);
+               await context.SaveChangesAsync();
+            } 
+            
+        }
+
+         public static async Task LoadProducts(DataContext context){
+            var options = new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true
+
+            };
+
+            if(context.Products.Any()) return;
+
+            var json = File.ReadAllText("Data/json/products.json");
+            var products = JsonSerializer.Deserialize<List<Product>>(json, options); 
+            
+            if(products is not null && products.Count>0){
+               await context.Products.AddRangeAsync(products);
+               await context.SaveChangesAsync();
+            } 
+            
+        }
+
+         public static async Task LoadOrderProducts(DataContext context){
+            var options = new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true
+
+            };
+
+            if(context.OrderProducts.Any()) return;
+
+            var json = File.ReadAllText("Data/json/orderproducts.json");
+            var orders = JsonSerializer.Deserialize<List<OrderProduct>>(json, options); 
+            
+            if(orders is not null && orders.Count>0){
+               await context.OrderProducts.AddRangeAsync(orders);
+               await context.SaveChangesAsync();
+            } 
+            
+        }
+
+        public static async Task LoadProductBatches(DataContext context){
+            var options = new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true
+
+            };
+
+            if(context.ProductBatches.Any()) return;
+
+            var json = File.ReadAllText("Data/json/productbatches.json");
+            var batches = JsonSerializer.Deserialize<List<ProductBatch>>(json, options); 
+            
+            if(batches is not null && batches.Count>0){
+               await context.ProductBatches.AddRangeAsync(batches);
+               await context.SaveChangesAsync();
+            } 
+            
+        }
+        
+
         
     }
 

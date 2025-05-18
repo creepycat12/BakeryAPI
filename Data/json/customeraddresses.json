@@ -1,0 +1,26 @@
+[
+    {
+        "customerId": 1,
+        "addressId":4
+    },
+    {
+        "customerId": 1,
+        "addressId":5
+    },
+    {
+        "customerId": 2,
+        "addressId":6
+    },
+    {
+        "customerId": 2,
+        "addressId":7
+    },
+    {
+        "customerId": 3,
+        "addressId":8
+    },
+    {
+        "customerId": 1,
+        "addressId":9
+    }
+]

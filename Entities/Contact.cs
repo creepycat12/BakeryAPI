@@ -1,12 +1,13 @@
 namespace bakery.api.Entities
 {
-    public class ContactInformation
+    public class Contact
     {
-        public int SupplierId { get; set; }
+        public int ContactId { get; set; }
         public string ContactPerson { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public Supplier Supplier { get; set; }
+        public SupplierContact SupplierContacts { get; set; }
+        public CustomerContact CustommerContacts { get; set; }
         
         
     }

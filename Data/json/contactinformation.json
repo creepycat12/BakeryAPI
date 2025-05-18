@@ -1,20 +1,32 @@
 [
     {
-        "supplierId": 1,
         "contactPerson": "Eddie Lu",
         "phoneNumber": "12345678",
         "email": "eddielu@gmail.com"
     },
     {
-        "supplierId": 2,
         "contactPerson": "Tatiana Lapina",
         "phoneNumber": "98765432",
         "email": "tatiana@gmail.com"
     },
     {
-        "supplierId": 3,
         "contactPerson": "Agnes Lind",
         "phoneNumber": "493849378",
         "email": "agnes@gmail.com"
+    },
+    {
+        "contactPerson": "Anwen Savage",
+        "phoneNumber": "378246293",
+        "email": "anwen@gmail.com"
+    },
+    {
+        "contactPerson": "Penni Grimmenhamn",
+        "phoneNumber": "89237482",
+        "email": "penni@gmail.com"
+    },
+    {
+        "contactPerson": "Emil Olsson",
+        "phoneNumber": "394829392",
+        "email": "emil@gmail.com"
     }
 ]

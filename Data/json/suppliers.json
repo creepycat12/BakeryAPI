@@ -1,11 +1,14 @@
 [
     {
-        "name": "The Farm"
+        "name": "The Farm",
+        "imageUrl":"https://res.cloudinary.com/dw1ptwi0s/image/upload/v1746806204/13_hqrbpr.png"
     },
     {
-        "name": "John & Co"
+        "name": "John & Co",
+        "imageUrl":"https://res.cloudinary.com/dw1ptwi0s/image/upload/v1746806204/14_xyredm.png"
     },
     {
-        "name": "From Chickens and Fields"
+        "name": "From Chickens and Fields",
+        "imageUrl":"https://res.cloudinary.com/dw1ptwi0s/image/upload/v1746806204/15_rjjkfr.png"
     }
 ]

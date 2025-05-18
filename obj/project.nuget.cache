@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "E1MHVJj/uRk=",
+  "dgSpecHash": "okPBvos8KbU=",
   "success": true,
-  "projectFilePath": "/Users/olgababkina/Advanced/Assignment3/bakery.api/bakery.api.csproj",
+  "projectFilePath": "/Users/olgababkina/Web/Assignment/bakery.api/bakery.api.csproj",
   "expectedPackageFiles": [
     "/Users/olgababkina/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/olgababkina/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
